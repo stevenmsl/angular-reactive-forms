@@ -1,0 +1,13 @@
+<label>
+    Name:
+    <!-- Register the control in the template   -->
+    <!-- the form control and DOM element communicate with each other -->
+    <input type="text" [formControl]="name"> 
+</label>
+<p>
+    <!-- the value property gives you a snapshot of the current value. -->
+    Value: {{ name.value}}
+</p>
+<p>
+    <button (click)="updateName()">Update Name</button>
+</p>
