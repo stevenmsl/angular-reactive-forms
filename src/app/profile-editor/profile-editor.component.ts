@@ -18,12 +18,39 @@ export class ProfileEditorComponent implements OnInit {
   */
   profileForm = new FormGroup({
     firstName: new FormControl(''),
-    lastName: new FormControl('')
+    lastName: new FormControl(''),
+    /* 
+      Using a nested form group instance allows you to break large forms groups into smaller, more manageable ones.
+    */
+    address : new FormGroup({
+      street: new FormControl(''),
+      city: new FormControl(''),
+      state: new FormControl(''),
+      zip: new FormControl('')
+    })
   });
 
   constructor() { }
 
+  onSubmit() {
+    console.warn(this.profileForm.value);
+  }
+
   ngOnInit() {
+  }
+
+  updateProfile() {
+    /*
+    The strict checks of the setValue() method help catch nesting errors in complex forms, 
+    while patchValue() fails silently on those errors.
+    Street is provided in an object inside the address property. This is necessary because the patchValue() method applies the update against the model structure. 
+    */
+    this.profileForm.patchValue({
+      firstName: 'Nancy',
+      address: {
+        street: '123 Dew Street'
+      }
+    });   
   }
 
 }
